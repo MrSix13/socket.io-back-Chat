@@ -7,7 +7,7 @@ export class SocketClient implements OnModuleInit {
   public socketClient: Socket;
 
   constructor() {
-    this.socketClient = io('http://localhost:3000');
+    this.socketClient = io('https://react-nest-websocket.vercel.app/');
   }
 
   onModuleInit() {

@@ -10,7 +10,7 @@ import { Server } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
-    origin: ['http://localhost:3001']
+    origin: '*'
   }
 })
 export class MyGeteway implements OnModuleInit {
