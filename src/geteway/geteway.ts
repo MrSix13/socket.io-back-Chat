@@ -8,6 +8,13 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
+export interface Message {
+  message: string;
+  user: string;
+}
+const date = Date.now();
+const today = new Date(date);
+
 @WebSocketGateway({
   cors: {
     origin: '*'
@@ -19,17 +26,15 @@ export class MyGeteway implements OnModuleInit {
 
   onModuleInit() {
     this.server.on('connection', (socket) => {
-      console.log(socket.id);
-      console.log('Connectd');
+      this.server.emit('users', socket.id);
     });
   }
 
   @SubscribeMessage('newMessage')
-  onNewMessage(@MessageBody() body: any) {
-    console.log(body);
+  onNewMessage(@MessageBody() body: Message) {
     this.server.emit('onMessage', {
-      message: 'New Message',
-      content: body
+      contentss: body,
+      date: today
     });
   }
 }

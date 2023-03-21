@@ -7,7 +7,8 @@ export class SocketClient implements OnModuleInit {
   public socketClient: Socket;
 
   constructor() {
-    this.socketClient = io('https://react-nest-websocket.vercel.app/');
+    /* this.socketClient = io('https://react-nest-websocket.vercel.app/'); production url */
+    this.socketClient = io('http://localhost:3001');
   }
 
   onModuleInit() {
@@ -16,10 +17,10 @@ export class SocketClient implements OnModuleInit {
 
   private registerConsumerEvents() {
     this.socketClient.on('connect', () => {
-      console.log('Connected to Getway');
+      console.log('connect');
     });
-    this.socketClient.on('onMessage', (payload: any) => {
-      console.log(payload);
+    this.socketClient.on('onMessage', () => {
+      console.log('llego mensaje?');
     });
   }
 }
